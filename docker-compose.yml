@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  error-free-text-db:
+    image: postgres
+    container_name: error-free-text-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - error-free-text_db_data:/var/lib/postgresql/data
+    networks:
+      - error-free-text-network
+
+  error-free-text-app:
+    build: .
+    container_name: error-free-text-app
+    restart: unless-stopped
+    ports:
+      - "24110:24110"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://error-free-text-db:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      JWT_ACCESS_EXPIRATION: ${JWT_ACCESS_EXPIRATION}
+      JWT_REFRESH_EXPIRATION: ${JWT_REFRESH_EXPIRATION}
+    depends_on:
+      - error-free-text-db
+    networks:
+      - error-free-text-network
+
+networks:
+  error-free-text-network:
+    driver: bridge
+
+volumes:
+  error-free-text_db_data:
