@@ -2,7 +2,7 @@ package org.errorfreetext.entity.task;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.errorfreetext.entity.User;
+import org.errorfreetext.entity.user.User;
 import org.errorfreetext.other.enums.TaskStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
