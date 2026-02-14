@@ -29,7 +29,7 @@ public class Task {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 20)
-    private TaskStatus status;
+    private TaskStatus status = TaskStatus.NEW;
 
     @Column(name = "source_text", nullable = false, columnDefinition = "TEXT")
     private String sourceText;
@@ -45,9 +45,9 @@ public class Task {
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 }
