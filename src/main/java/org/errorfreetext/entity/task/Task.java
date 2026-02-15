@@ -14,7 +14,6 @@ import java.util.UUID;
 @Table(name = "task")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Task {

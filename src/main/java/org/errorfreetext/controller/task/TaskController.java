@@ -16,7 +16,7 @@ public interface TaskController {
             @Valid @RequestBody TaskDtoIn taskCreateDtoIn
     );
 
-    @GetMapping
+    @GetMapping({"/{taskId}"})
     TaskInfoDtoOut getTaskInfo(@PathVariable UUID taskId);
 
     @GetMapping("/all")
